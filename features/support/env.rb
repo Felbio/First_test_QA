@@ -4,9 +4,17 @@ require 'capybara/rspec'
 require 'site_prism'
 require 'rspec'
 require 'rspec/expectations'
+require_relative 'page.initialize.rb'
+include RSpec::Matchers
+
+Environment = ENV['URL']
+
+World(Page)
 
 Capybara.configure do |config|
   config.default_driver = :selenium_chrome
-  config.app_host = 'https://www.linkedin.com/checkpoint/lg/sign-in-another-account'
+  config.app_host = Environment
+  #executar o bundle exec cucumbrer -p prod
+  # bundle exec cucumber --format html --out=relatorio.html
   config.default_max_wait_time = 5
 end
